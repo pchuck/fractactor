@@ -1,0 +1,14 @@
+TODO
+
+o use lift to expose the calculator as a restful service
+
+o when rendering to the screen, first few scanlines are sometimes not 
+  rendered. probably a timing issue between the creation of the 
+  graphics context vs the arrival of first computed pixels
+
+o add general logging
+
+o add some partial functions
+
+o parallelize with remote actors
+

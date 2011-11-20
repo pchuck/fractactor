@@ -1,0 +1,96 @@
+                          fractactor README
+
+
+General Information
+
+  fractactor is an actor-based fractal generator implemented in scala.
+
+  The purpose of this project is to utilize some of the key features of
+  the scala programming language to build an elegant, highly parallel, 
+  and modular solution for computing functions, such as the mandelbrot set,
+  in the complex plane.
+
+  This project isn't the fastest Mandelbrot set generator ever written.
+  And, it certainly isn't the most feature rich. 
+
+  It does, however, attempt to illustrate some of scala's most interesting 
+  features.
+
+    0. Overloaded operators - complex operations, e.g. Complex: z = z*z + c
+    1. Actors - parallelism and asynchronous messaging, e.g. FractalPeer
+    2. Traits - rendering and calculation, e.g. HolomorphicFunction, Renderer
+    3. Mixins - compound composition, e.g. MandelbrotGenerator
+
+
+Usage
+
+  % scripts/fractactor.sh
+
+  Scala actor-based Mandelbrot set generator.
+  To generate to the UI rather than file, specify "screen" for file option
+
+  Usage: MandelbrotGenerator file iter width height rmin imin rmax imax [pixels]
+    e.g. MandelbrotGenerator image.jpg 256 512 512 -1.5 -1.5 1.5 1.5 pixels
+
+
+Design/Flow
+
+        user
+               \  .main
+               |
+    ^          v
+    |    +-----------+                     [0]            
+    |    | Generator | . . . . . . . . . . . . . . . . . . . . . . . . 
+    |    +-----------+                                               .
+    |     [1]  | .do                     MandelbrotFunction          .
+    |          V                                 |                   .
+    |     -----------     PixelRequest     ------------     .start   .
+    |    | Assembler | -----------------> | Calculator | < . . . . . .
+    |     -----------         [2]          ------------              .
+    |                                            |                   .
+    | [5]                                    [3] | PixelResponse     .
+    |                                            V                   .
+    |     -----------         [4]            -----------             .
+     \__ | Renderer  | <------------------ |    Peer   | < . . . . . .
+          -----------      .set(x, y)       -----------     .start
+
+
+Classes
+
+  Calculation
+    HolomorphicFunction [trait] - a generic function in the complex plane
+      MandelbrotFunction [trait] - the Mandelbrot function
+
+  Rendering
+    Renderer [trait] - an interface for rendering pixels
+      ScreenRenderer - Renderer, with a screen implementation
+      FileRenderer - Renderer, with a JPG file implementation
+    RenderPanel - Java/Swing panel w/ support for plotting pixels or scanlines
+
+  Fractal Generation
+    Settings - general system settings
+    ImageAssembler - converts cartesian screen points into calculation requests
+    FractalCalculator - (actor) receives & responds to calculation requests
+    FractalPeer - (actor) receives results and dispatches them to the renderer
+
+  Console/UI Application
+    MandelbrotGenerator - generator composed from assembler/calculator/peer
+
+  Tests
+    MandelbrotClient - console to test point calculation and messaging
+
+
+Performance
+
+  512x512, 256 threshold
+    using synchronous calc calls, no actors: 1.956s to 2.197s
+
+  async, with "!"
+    using 1 actor per pixel: 4.389s
+    using 1 actor per scanline: 2.024s
+
+  async, with "!!"
+    to disk: 1 actor per scanline: 1.414s
+    to screen: 1 actor per scanline: 2.472s
+    to screen: 1 actor per pixel: 11.960s
+
