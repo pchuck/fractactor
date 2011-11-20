@@ -16,8 +16,8 @@ General Information
   This project isn't the fastest Mandelbrot set generator ever written.
   And, it certainly isn't the most feature rich. 
 
-  It does, however, attempt to illustrate some of scala's interesting 
-  features.
+  It does, however, attempt to take advantage of some of scala's interesting 
+  features:
 
     0. Overloaded operators - complex operations, e.g. Complex: z = z*z + c
     1. Actors - parallelism and asynchronous messaging, e.g. FractalPeer
