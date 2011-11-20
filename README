@@ -3,17 +3,20 @@
 
 General Information
 
-  fractactor is an actor-based fractal generator implemented in scala.
+  fractactor is a fractal generator implemented in scala. It uses
+  actors and asynchronous messaging to achieve a high degree of 
+  parallelism and traits to layer in compute functions and rendering 
+  strategies.
 
   The purpose of this project is to utilize some of the key features of
   the scala programming language to build an elegant, highly parallel, 
-  and modular solution for computing functions, such as the mandelbrot set,
+  and modular solution for calculating functions, such as the mandelbrot set,
   in the complex plane.
 
   This project isn't the fastest Mandelbrot set generator ever written.
   And, it certainly isn't the most feature rich. 
 
-  It does, however, attempt to illustrate some of scala's most interesting 
+  It does, however, attempt to illustrate some of scala's interesting 
   features.
 
     0. Overloaded operators - complex operations, e.g. Complex: z = z*z + c
