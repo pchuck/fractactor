@@ -1,0 +1,16 @@
+                          fractactor NOTES
+
+Performance
+
+  512x512, 256 threshold
+    using synchronous calc calls, no actors: 1.956s to 2.197s
+
+  async, with "!"
+    using 1 actor per pixel: 4.389s
+    using 1 actor per scanline: 2.024s
+
+  async, with "!!"
+    to disk: 1 actor per scanline: 1.414s
+    to screen: 1 actor per scanline: 2.472s
+    to screen: 1 actor per pixel: 11.960s
+
