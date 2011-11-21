@@ -3,14 +3,14 @@
 
 General Information
 
-  fractactor is a fractal generator implemented in scala. It uses
+  fractactor is a fractal generating engine implemented in scala. It uses
   actors and asynchronous messaging to achieve a high degree of 
   parallelism and traits to layer in compute functions and rendering 
   strategies.
 
   The purpose of this project is to utilize some of the key features of
   the scala programming language to build an elegant, highly parallel, 
-  and modular solution for calculating functions, such as the mandelbrot set,
+  and modular solution for calculating functions, such as the Mandelbrot set,
   in the complex plane.
 
   This project isn't the fastest Mandelbrot set generator ever written.
@@ -20,21 +20,26 @@ General Information
   features:
 
     0. Overloaded operators - complex operations, e.g. Complex: z = z*z + c
-    1. Actors - parallelism and asynchronous messaging, e.g. FractalPeer
-    2. Traits - rendering and calculation, e.g. HolomorphicFunction, Renderer
-    3. Mixins - compound composition, e.g. MandelbrotGenerator
+    1. Pattern matching - e.g. FractalGenerator, renderer/function selection
+    2. Actors - parallelism and asynchronous messaging, e.g. FractalPeer
+    3. Traits - rendering and calculation, e.g. HolomorphicFunction, Renderer
+    4. Mixins - compound composition, e.g. MandelbrotGenerator
 
 
 Usage
 
   % scripts/fractactor.sh
 
-  Scala actor-based Mandelbrot set generator.
-  To generate to the UI rather than file, specify "screen" for file option
+  Scala actor-based fractal engine.
 
-  Usage: MandelbrotGenerator file iter width height rmin imin rmax imax [pixels]
-    e.g. MandelbrotGenerator image.jpg 256 512 512 -1.5 -1.5 1.5 1.5 pixels
+  Usage: FractalGenerator type render mode iter w h rmin imin rmax imax [file]
 
+  e.g. To generate the Mandelbrot set, using 1 actor per pixel, to a file:
+    FractalGenerator mandelbrot file pixels 256 512 512 -1.5 -1.5 1.5 1.5 x.jpg
+
+  e.g. To generate the Mandelbrot set, w/ 1 actor per scanline, to the screen:
+    FractalGenerator mandelbrot screen pixels 256 512 512 -1.5 -1.5 1.5 1.5
+  
 
 Design/Flow
 

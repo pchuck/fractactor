@@ -30,7 +30,7 @@ class ImageAssembler(val peer: Actor,
     }
   }
 
-  def doByLine() {
+  def doByScanline() {
     var y = 0
     var yy = 0 : Double
     for(y <- 0 until height) {
@@ -39,11 +39,11 @@ class ImageAssembler(val peer: Actor,
     }
   }
 
-  def doByLine(y: Int) {
+  def doByScanline(y: Int) {
     if(y < height) {
       val yy = y * size.im / height + ll.im
       calculator !! LineRequest(y, width, ll.re, ur.re, yy, peer)
-      doByLine(y+1);
+      doByScanline(y + 1);
     }
   }
 }

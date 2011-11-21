@@ -6,10 +6,19 @@ object Settings {
 
   // bailout threshold
   val Threshold = 4.0
+}
 
-  // override file keyword; generate to screen
-  val SCREEN = "screen"
-
-  // pixel vs. scanline image segmentation
+object Mode {
   val PIXELS = "pixels"
+  val SCANLINES = "scanlines"
+}
+
+object Functions {
+  val MANDELBROT = "mandelbrot"
+  val NOOP = "noop"
+}
+
+object Renderers {
+  val SCREEN = "screen"
+  val FILE = "file"
 }
