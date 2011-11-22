@@ -2,6 +2,7 @@ package net.ultrametrics.fractactor
 
 import scala.actors.Actor
 import scala.actors.Actor._
+
 import net.ultrametrics.math.Complex
 
 // calculation request/response messages
@@ -14,10 +15,11 @@ case class LineRequest(y: Int, count: Int, re1: Double, re2: Double,
 case class LineResponse(y: Int, scanline: Array[Int])
 
 /**
- * Mandelbrot pixel calculator.
+ * Fractal point calculator.
  * 
  * Given a coordinate in the complex plane, computes the corresponding
- * point in the Mandelbrot set.
+ * value of a holomorphic function (such as the Mandelbrot set) layered
+ * onto this calculator as a trait.
  *
  * Functions as an actor which responds to Complex coordinate messages
  * or a standalone function which synchronously computes a point.
