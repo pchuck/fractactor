@@ -23,7 +23,7 @@ import net.ultrametrics.math.Complex
  * @param ur upper-right coordinate of the function bound in the complex plane
  */
 class FractalPeer(val renderer: Renderer, 
-                  val width: Int, val height: Int) extends Actor
+                  val width: Int, val height: Int) extends Actor with Serializable
 {
   var pendingPixels = height * width // # of pixels == amount of pending work
   var pendingLines = height

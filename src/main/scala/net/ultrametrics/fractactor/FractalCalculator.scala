@@ -2,10 +2,13 @@ package net.ultrametrics.fractactor
 
 import scala.actors.Actor
 import scala.actors.Actor._
+import scala.actors.remote._
+import scala.actors.remote.RemoteActor._
 
 import net.ultrametrics.math.Complex
 
 // calculation request/response messages
+case class VerySimpleRequest(c: Complex)
 case class SimpleRequest(c: Complex, client: Actor)
 case class SimpleResponse(c: Complex, result: Int)
 case class PixelRequest(x: Int, y: Int, c: Complex, client: Actor)
@@ -28,6 +31,10 @@ class FractalCalculator(val iterationLimit: Int)
   extends HolomorphicFunction with Actor
 {
   def act() {
+//RemoteActor.classLoader = getClass().getClassLoader()
+//val remoteClient = select(Node("localhost", 10000), 'client)
+//println("found")
+
     loop {
       react {
         case LineRequest(y, count, re1, re2, im, client) => {

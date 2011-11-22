@@ -1,6 +1,6 @@
 package net.ultrametrics.fractactor
 
-import scala.actors.Actor
+import scala.actors.{Actor, AbstractActor}
 
 import net.ultrametrics.math.Complex
 
@@ -12,7 +12,7 @@ import net.ultrametrics.math.Complex
  * in the complex plane.
  */
 class ImageAssembler(val peer: Actor, 
-                     val calculator: FractalCalculator, 
+                     val calculator: AbstractActor, 
                      val width: Int, val height: Int, 
                      val ll: Complex, val ur: Complex)
 {

@@ -3,7 +3,7 @@ package net.ultrametrics.math
 /**
  * A complex number
  */
-class Complex(val re: Double, val im: Double) {
+class Complex(val re: Double, val im: Double) extends Serializable {
   def + (that: Complex) =
     new Complex(re + that.re, im + that.im)
   def - (that: Complex) =

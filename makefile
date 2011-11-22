@@ -3,6 +3,7 @@
 PKG=net.ultrametrics.fractactor
 MAIN=FractalGenerator
 TEST=MandelbrotClient
+RMT=RemoteFractalCalculator
 SCALA=scala-2.9.1
 OUT=target/$(SCALA)/classes
 IMG=/tmp/mandelbrot.jpg
@@ -34,6 +35,12 @@ lines: compile
 # view the rendered image
 view: run
 	xv /tmp/mandelbrot.jpg
+
+remote_client: compile
+	scala -cp $(OUT) $(PKG).RemoteMandelbrotClient 256 0.5 0.5
+
+remote_actor:
+	scala $(OPTS) -cp $(OUT) $(PKG).$(RMT) localhost mandelbrot 256
 
 usage:
 	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN)

@@ -1,8 +1,14 @@
 package net.ultrametrics.fractactor
 
+import scala.actors.Actor
+import scala.actors.Actor._
+import scala.actors.remote._
+import scala.actors.remote.RemoteActor._
+
 import net.ultrametrics.math.Complex
 import net.ultrametrics.fractactor.Functions._
 import net.ultrametrics.fractactor.Renderers._
+import net.ultrametrics.fractactor.Settings._
 
 /**
  * Fractal engine.
@@ -30,6 +36,7 @@ class FractalGenerator(functionName: String, rendererName: String,
   }
   var calculator = functionName match {
     case MANDELBROT => new FractalCalculator(iterations) with MandelbrotFunction
+//    case MANDELBROT => select(Node("localhost", CALC_PORT), 'lambda)
   }
   val peer = new FractalPeer(renderer, width, height)
   val assembler = new ImageAssembler(peer, calculator, width, height, ll, ur)

@@ -6,6 +6,10 @@ object Settings {
 
   // bailout threshold
   val Threshold = 4.0
+
+  val CLIENT_PORT = 9999
+  val CLIENT_HOST = "localhost"
+  val CALC_PORT = 10000
 }
 
 object Mode {
