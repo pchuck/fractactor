@@ -1,9 +1,8 @@
 # fractactor makefile
 #  
 PKG=net.ultrametrics.fractactor
-MAIN=MandelbrotClient
-GEN=FractalGenerator
-UI=FractalRenderer
+MAIN=FractalGenerator
+TEST=MandelbrotClient
 SCALA=scala-2.9.1
 OUT=target/$(SCALA)/classes
 IMG=/tmp/mandelbrot.jpg
@@ -17,27 +16,27 @@ compile:
 
 # single pixel calculation test
 simple: compile
-	scala -cp $(OUT) $(PKG).$(MAIN) 256 0.5 0.5
+	scala -cp $(OUT) $(PKG).$(TEST) 256 0.5 0.5
 
 # render to disk with actors per pixel or scanline
 run: compile
-#	scala -cp $(OUT) $(PKG).$(GEN) x.jpg $(P) -2.0 -1.5 1.0 1.5
-	scala -cp $(OUT) $(PKG).$(GEN) mandelbrot file scanlines $(P) -0.753 0.1164 -0.733 0.1364 $(IMG)
+#	scala -cp $(OUT) $(PKG).$(MAIN) x.jpg $(P) -2.0 -1.5 1.0 1.5
+	scala -cp $(OUT) $(PKG).$(MAIN) mandelbrot file scanlines $(P) -0.753 0.1164 -0.733 0.1364 $(IMG)
 
 # render to screen with actor per pixel
 pixels: compile
-	scala $(OPTS) -cp $(OUT) $(PKG).$(GEN) mandelbrot screen pixels $(P) -0.753 0.1164 -0.733 0.1364
+	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN) mandelbrot screen pixels $(P) -0.753 0.1164 -0.733 0.1364
 
 # render to screen with actor per scanline
 lines: compile
-	scala $(OPTS) -cp $(OUT) $(PKG).$(GEN) mandelbrot screen scanlines $(P) -0.753 0.1164 -0.733 0.1364
+	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN) mandelbrot screen scanlines $(P) -0.753 0.1164 -0.733 0.1364
 
 # view the rendered image
 view: run
 	xv /tmp/mandelbrot.jpg
 
 usage:
-	scala $(OPTS) -cp $(OUT) $(PKG).$(GEN)
+	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN)
 
 package:
 	sbt package

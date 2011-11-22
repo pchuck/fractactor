@@ -24,7 +24,7 @@ class FractalGenerator(functionName: String, rendererName: String,
                        width: Int, height: Int, iterations: Int, 
                        ll: Complex, ur: Complex) 
 {
-  var renderer: Renderer = rendererName match {
+  var renderer = rendererName match {
     case SCREEN => new ScreenRenderer(width, height)
     case FILE => new FileRenderer(fileName, width, height)
   }
