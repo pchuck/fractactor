@@ -23,7 +23,7 @@ General Information
     1. Pattern matching - e.g. FractalGenerator, renderer/function selection
     2. Actors - parallelism and asynchronous messaging, e.g. FractalPeer
     3. Traits - rendering and calculation, e.g. HolomorphicFunction, Renderer
-    4. Mixins - compound composition, e.g. MandelbrotGenerator
+    4. Mixins - compound composition, e.g. FractalGenerator
 
 
 Usage
@@ -82,7 +82,7 @@ Classes
     FractalPeer - (actor) receives results and dispatches them to the renderer
 
   Console/UI Application
-    MandelbrotGenerator - generator composed from assembler/calculator/peer
+    FractalGenerator - generator composed from assembler/calculator/peer
 
   Tests
     MandelbrotClient - console to test point calculation and messaging
