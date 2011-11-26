@@ -1,11 +1,13 @@
 # fractactor makefile
-#  
+# 
+# this project can be built, run, deployed, etc, using sbt, without make.
+# however, the following make targets are convenient hooks and save some typing.
+#
 PKG=net.ultrametrics.fractactor
 MAIN=FractalGenerator
 TEST=MandelbrotClient
 RMT=RemoteFractalCalculator
 SCALA=scala-2.9.1
-OUT=target/$(SCALA)/classes
 IMG=/tmp/mandelbrot.jpg
 P=256 512 512
 OPTS=-Dactors.corePoolSize=20 -Dactors.maxPoolSize=40
@@ -17,33 +19,32 @@ compile:
 
 # single pixel calculation test
 simple: compile
-	scala -cp $(OUT) $(PKG).$(TEST) 256 0.5 0.5
+	sbt "run-main $(PKG).$(TEST) 256 0.5 0.5"
 
 # render to disk with actors per pixel or scanline
 run: compile
-#	scala -cp $(OUT) $(PKG).$(MAIN) x.jpg $(P) -2.0 -1.5 1.0 1.5
-	scala -cp $(OUT) $(PKG).$(MAIN) mandelbrot file scanlines $(P) -0.753 0.1164 -0.733 0.1364 $(IMG)
+	sbt "run-main $(PKG).$(MAIN) mandelbrot file scanlines $(P) -0.753 0.1164 -0.733 0.1364 $(IMG)"
 
 # render to screen with actor per pixel
 pixels: compile
-	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN) mandelbrot screen pixels $(P) -0.753 0.1164 -0.733 0.1364
+	sbt "run-main $(PKG).$(MAIN) mandelbrot screen pixels $(P) -0.753 0.1164 -0.733 0.1364"
 
 # render to screen with actor per scanline
 lines: compile
-	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN) mandelbrot screen scanlines $(P) -0.753 0.1164 -0.733 0.1364
+	sbt "run-main $(PKG).$(MAIN) mandelbrot screen scanlines $(P) -0.753 0.1164 -0.733 0.1364"
 
 # view the rendered image
-view: run
+view: 
 	xv /tmp/mandelbrot.jpg
 
 remote_client: compile
-	scala -cp $(OUT) $(PKG).RemoteMandelbrotClient 256 0.5 0.5
+	sbt "run-main $(PKG).RemoteMandelbrotClient 256 0.5 0.5"
 
 remote_actor:
-	scala $(OPTS) -cp $(OUT) $(PKG).$(RMT) localhost mandelbrot 256
+	sbt "run-main $(PKG).$(RMT) localhost mandelbrot 256"
 
 usage:
-	scala $(OPTS) -cp $(OUT) $(PKG).$(MAIN)
+	sbt "run-main $(PKG).$(MAIN)"
 
 package:
 	sbt package
