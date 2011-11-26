@@ -1,27 +1,27 @@
 package net.ultrametrics.fractactor
 
-import java.awt.Color
-import java.awt.Graphics
-import javax.swing.JPanel
+import scala.swing._
+import java.awt.image.BufferedImage;
 
-
-class RenderPanel() extends JPanel 
+class RenderPanel() extends Panel 
 {
-  override def paintComponent(g: Graphics) {
-//    size.setSize(image.getWidth(), image.getHeight())
+  var image = null : BufferedImage
+
+  def create(width: Int, height: Int) {
+    image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
+  }
+
+  override def paintComponent(g: Graphics2D) {
+    g.drawImage(image, 0, 0, null);
   }
 
   def drawScanline(width: Int, y: Int, scanline: Array[Int]) {
-    var g = getGraphics()
     for(x <- 0 until width) {
-      g.setColor(new Color(scanline(x) * Settings.Scale))
-      g.fillRect(x, y, 1, 1)
+      image.setRGB(x, y, scanline(x) * Settings.Scale)
     }
   }
 
   def drawPixel(x: Int, y: Int, color: Int) {
-    var g = getGraphics()
-    g.setColor(new Color(color * Settings.Scale))
-    g.fillRect(x, y, 1, 1)
+    image.setRGB(x, y, color * Settings.Scale)
   }
 }
