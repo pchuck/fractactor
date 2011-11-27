@@ -9,7 +9,7 @@ TEST=MandelbrotClient
 RMT=RemoteFractalCalculator
 SCALA=scala-2.9.1
 IMG=/tmp/mandelbrot.jpg
-P=256 512 512
+POI=256 512 512 -0.753 0.1164 -0.733 0.1364
 OPTS=-Dactors.corePoolSize=20 -Dactors.maxPoolSize=40
 
 all: compile
@@ -23,15 +23,15 @@ simple: compile
 
 # render to disk with actors per pixel or scanline
 run: compile
-	sbt "run-main $(PKG).$(MAIN) mandelbrot file scanlines $(P) -0.753 0.1164 -0.733 0.1364 $(IMG)"
+	sbt "run-main $(PKG).$(MAIN) mandelbrot file scanlines $(POI) $(IMG)"
 
 # render to screen with actor per pixel
 pixels: compile
-	sbt "run-main $(PKG).$(MAIN) mandelbrot screen pixels $(P) -0.753 0.1164 -0.733 0.1364"
+	sbt "run-main $(PKG).$(MAIN) mandelbrot screen pixels $(POI)"
 
 # render to screen with actor per scanline
 lines: compile
-	sbt "run-main $(PKG).$(MAIN) mandelbrot screen scanlines $(P) -0.753 0.1164 -0.733 0.1364"
+	sbt "run-main $(PKG).$(MAIN) mandelbrot screen scanlines $(POI)"
 
 # view the rendered image
 view: 
