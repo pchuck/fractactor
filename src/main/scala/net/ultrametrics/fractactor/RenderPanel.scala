@@ -1,7 +1,7 @@
 package net.ultrametrics.fractactor
 
 import scala.swing._
-import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage
 
 class RenderPanel() extends Panel 
 {
@@ -9,6 +9,11 @@ class RenderPanel() extends Panel
 
   def create(width: Int, height: Int) {
     image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
+
+    // set initial background white to highlight async progress of actors
+    for(x <- 0 until width)
+      for(y <- 0 until height)
+        image.setRGB(x, y, 0xffffff);
   }
 
   override def paintComponent(g: Graphics2D) {
