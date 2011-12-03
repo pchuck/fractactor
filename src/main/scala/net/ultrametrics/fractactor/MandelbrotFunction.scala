@@ -4,8 +4,12 @@ import net.ultrametrics.math.Complex
 
 /**
  * A function for calculating the mandelbrot set.
+ *
+ * By default, uses PointScaler which is a noop on the calculated value.
+ * Functions utilizing this trait, however, can mixin an alternate 
+ * PointScaler implementation to achieve different point-value mappings.
  */
-trait MandelbrotFunction extends HolomorphicFunction with ScatterPointScaler
+trait MandelbrotFunction extends HolomorphicFunction with PointScaler
 {
   val iterationLimit: Int
 

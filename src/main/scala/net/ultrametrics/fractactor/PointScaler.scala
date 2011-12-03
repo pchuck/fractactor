@@ -9,5 +9,5 @@ trait PointScaler {
    * @param value the initial point
    * @return the scaled point
    */
-  def transform(value: Int) : Int
+  def transform(value: Int) = value
 }

@@ -5,5 +5,5 @@ package net.ultrametrics.fractactor
  */
 trait ScatterPointScaler extends PointScaler
 {
-  def transform(value: Int) = value * Settings.Scale8to24Bit
+  override def transform(value: Int) = value * Settings.Scale8to24Bit
 }
