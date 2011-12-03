@@ -15,7 +15,12 @@ extends Renderer
 
   def create(width: Int, height: Int) = { }
 
-  def set(x: Int, y: Int, color: Int) = image.setRGB(x, y, color*Settings.Scale)
+  def set(x: Int, y: Int, value: Int) = image.setRGB(x, y, value)
+
+  def set(y: Int, scanline: Array[Int]) = {
+    for(x <- 0 until width)
+      image.setRGB(x, y, scanline(x))
+  }
 
   def save() = {
     try

@@ -19,14 +19,18 @@ class RenderPanel() extends Panel
   override def paintComponent(g: Graphics2D) {
     g.drawImage(image, 0, 0, null);
   }
-
+/*
   def drawScanline(width: Int, y: Int, scanline: Array[Int]) {
     for(x <- 0 until width) {
       image.setRGB(x, y, scanline(x) * Settings.Scale)
     }
   }
+  */
+  def drawScanline(width: Int, y: Int, scanline: Array[Int]) {
+    image.setRGB(0, y, width, 1, scanline, 0, 1)
+  }
 
-  def drawPixel(x: Int, y: Int, color: Int) {
-    image.setRGB(x, y, color * Settings.Scale)
+  def drawPixel(x: Int, y: Int, value: Int) {
+    image.setRGB(x, y, value)
   }
 }

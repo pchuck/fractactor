@@ -24,9 +24,14 @@ class ScreenRenderer(val width: Int, val height: Int) extends Renderer
     mainFrame.visible = true
   }
 
+  def set(y: Int, scanline: Array[Int]) = {
+    panel.drawScanline(width, y, scanline)
+    mainFrame.repaint
+  }
+
   def set(x: Int, y: Int, color: Int) = {
     panel.drawPixel(x, y, color)
-    mainFrame.repaint // not very efficient, but illustrates actor progress
+    mainFrame.repaint // repaint per pixels to highlight actor progress
   }
 
   def save() = { }

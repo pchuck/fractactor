@@ -21,6 +21,13 @@ trait Renderer
   def set(x: Int, y: Int, color: Int) 
 
   /**
+   * Set a scanline in the image.
+   * @param y the y-coordinate
+   * @param scanline the scanline
+   */
+  def set(y: Int, scanline: Array[Int]) 
+
+  /**
    * Persist the image
    */
   def save()

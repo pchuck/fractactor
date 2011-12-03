@@ -46,8 +46,11 @@ class FractalPeer(val renderer: Renderer,
       react {
         case LineResponse(y, scanline) => {
 //            print("|")
+/*
           for(x <- 0 until width)
             renderer.set(x, y, scanline(x))
+*/
+          renderer.set(y, scanline)
           pendingLines -= 1
 
           if(pendingLines == 0) {

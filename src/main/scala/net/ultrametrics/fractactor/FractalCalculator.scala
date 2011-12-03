@@ -27,14 +27,10 @@ case class LineResponse(y: Int, scanline: Array[Int])
  * Functions as an actor which responds to Complex coordinate messages
  * or a standalone function which synchronously computes a point.
  */
-class FractalCalculator(val iterationLimit: Int) 
-  extends HolomorphicFunction with Actor
+class FractalCalculator(val iterationLimit: Int, val ps: PointScaler) 
+  extends HolomorphicFunction with Actor // with PointScaler
 {
   def act() {
-//RemoteActor.classLoader = getClass().getClassLoader()
-//val remoteClient = select(Node("localhost", 10000), 'client)
-//println("found")
-
     loop {
       react {
         case LineRequest(y, count, re1, re2, im, client) => {
@@ -43,7 +39,6 @@ class FractalCalculator(val iterationLimit: Int)
           val increment = (re2 - re1) / count
           var re = re1
           for(x <- 0 until count) {
-//            results(x) = calculate(0, new Complex(0, 0), new Complex(re, im))
             results(x) = calculate(new Complex(re, im))
             re += increment
           }

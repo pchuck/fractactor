@@ -8,6 +8,8 @@ import net.ultrametrics.math.Complex
 trait MandelbrotFunction extends HolomorphicFunction 
 {
   val iterationLimit: Int
+//  val func: PointScaler
+  val ps: PointScaler
 
   // iterative
   override def calculate(c: Complex): Int = {
@@ -18,7 +20,8 @@ trait MandelbrotFunction extends HolomorphicFunction
       z = z * z + c
       iteration += 1
     } while(iteration < iterationLimit && z.scalar < Settings.Threshold)
-    iteration
+
+    ps.iToRGB(iteration)
   }
 
   // recursive
@@ -26,6 +29,6 @@ trait MandelbrotFunction extends HolomorphicFunction
     if(iteration < iterationLimit && z.scalar < Settings.Threshold)
       calculate(iteration+1, z*z+c, c)
     else
-      iteration
+      ps.iToRGB(iteration)
   }
 }
