@@ -1,10 +1,13 @@
 package net.ultrametrics.fractactor
 
-/** Point scaling functions.
+/**
+ * Ability to scale a point value with some transformation function.
  */
-class PointScaler {
+trait PointScaler {
   /**
-   * Scale a calculated point to 24-bit RGB space for screen display.
+   * Transform a point.
+   * @param value the initial point
+   * @return the scaled point
    */
-  def iToRGB(iteration: Int) = iteration * Settings.Scale
+  def transform(value: Int) : Int
 }

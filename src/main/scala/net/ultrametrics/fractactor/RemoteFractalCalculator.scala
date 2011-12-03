@@ -13,9 +13,8 @@ import net.ultrametrics.fractactor.Functions._
  * Remote fractal point calculator.
  */
 class RemoteFractalCalculator(val hostName: String, 
-                              val iterationLimit: Int,
-                              val ps: PointScaler)
-extends HolomorphicFunction with Actor
+                              val iterationLimit: Int)
+  extends HolomorphicFunction with Actor
 {
   def act() {
     RemoteActor.classLoader = getClass().getClassLoader()
@@ -58,8 +57,8 @@ object RemoteFractalCalculator {
       println("starting remote actor on '" + hostName + "'..")
       var calculator = functionName match {
         case MANDELBROT => 
-          new RemoteFractalCalculator(hostName, iterations, new PointScaler) 
-          with MandelbrotFunction
+          new RemoteFractalCalculator(hostName, iterations) 
+            with MandelbrotFunction
       }
       calculator.start
     }

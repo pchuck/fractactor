@@ -22,13 +22,14 @@ case class LineResponse(y: Int, scanline: Array[Int])
  * 
  * Given a coordinate in the complex plane, computes the corresponding
  * value of a holomorphic function (such as the Mandelbrot set) layered
- * onto this calculator as a trait.
+ * onto this calculator as a trait. PointScaler trait is used to
+ * transform the calculated fractal point into a color in the viewplane.
  *
  * Functions as an actor which responds to Complex coordinate messages
  * or a standalone function which synchronously computes a point.
  */
-class FractalCalculator(val iterationLimit: Int, val ps: PointScaler) 
-  extends HolomorphicFunction with Actor // with PointScaler
+class FractalCalculator(val iterationLimit: Int) 
+  extends HolomorphicFunction with Actor
 {
   def act() {
     loop {

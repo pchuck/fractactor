@@ -27,8 +27,7 @@ class MandelbrotClient extends Actor {
   }
 
   def orchestrate(i: Int, c: Complex) {
-    val calculator = 
-      new FractalCalculator(i, new PointScaler) with MandelbrotFunction
+    val calculator = new FractalCalculator(i) with MandelbrotFunction
     calculator.start // start the calculator
     calculator !! SimpleRequest(c, this) // send calculation request message
   }

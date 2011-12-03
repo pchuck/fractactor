@@ -35,9 +35,7 @@ class FractalGenerator(functionName: String, rendererName: String,
     case FILE => new FileRenderer(fileName, width, height)
   }
   var calculator = functionName match {
-    case MANDELBROT => 
-      new FractalCalculator(iterations, new PointScaler) with MandelbrotFunction
-//    case MANDELBROT => select(Node("localhost", CALC_PORT), 'lambda)
+    case MANDELBROT => new FractalCalculator(iterations) with MandelbrotFunction
   }
   val peer = new FractalPeer(renderer, width, height)
   val assembler = new ImageAssembler(peer, calculator, width, height, ll, ur)

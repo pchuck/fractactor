@@ -2,7 +2,7 @@ package net.ultrametrics.fractactor
 
 object Settings {
   // color scaling
-  val Scale = 1<<16 : Int
+  val Scale8to24Bit = 1<<16 : Int
 
   // bailout threshold
   val Threshold = 4.0

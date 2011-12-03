@@ -5,11 +5,9 @@ import net.ultrametrics.math.Complex
 /**
  * A function for calculating the mandelbrot set.
  */
-trait MandelbrotFunction extends HolomorphicFunction 
+trait MandelbrotFunction extends HolomorphicFunction with ScatterPointScaler
 {
   val iterationLimit: Int
-//  val func: PointScaler
-  val ps: PointScaler
 
   // iterative
   override def calculate(c: Complex): Int = {
@@ -21,7 +19,7 @@ trait MandelbrotFunction extends HolomorphicFunction
       iteration += 1
     } while(iteration < iterationLimit && z.scalar < Settings.Threshold)
 
-    ps.iToRGB(iteration)
+    transform(iteration)
   }
 
   // recursive
@@ -29,6 +27,6 @@ trait MandelbrotFunction extends HolomorphicFunction
     if(iteration < iterationLimit && z.scalar < Settings.Threshold)
       calculate(iteration+1, z*z+c, c)
     else
-      ps.iToRGB(iteration)
+      transform(iteration)
   }
 }
