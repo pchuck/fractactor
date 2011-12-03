@@ -5,7 +5,6 @@ import scala.actors.Actor._
 
 import net.ultrametrics.math.Complex
 
-
 /**
  * Fractal peer.
  *
@@ -22,8 +21,8 @@ import net.ultrametrics.math.Complex
  * @param ll lower-left coordinate of the function bound in the complex plane
  * @param ur upper-right coordinate of the function bound in the complex plane
  */
-class FractalPeer(val renderer: Renderer, 
-                  val width: Int, val height: Int) extends Actor with Serializable
+class FractalPeer(val renderer: Renderer, val width: Int, val height: Int) 
+  extends Actor with Serializable
 {
   var pendingPixels = height * width // # of pixels == amount of pending work
   var pendingLines = height
@@ -45,11 +44,6 @@ class FractalPeer(val renderer: Renderer,
     loop {
       react {
         case LineResponse(y, scanline) => {
-//            print("|")
-/*
-          for(x <- 0 until width)
-            renderer.set(x, y, scanline(x))
-*/
           renderer.set(y, scanline)
           pendingLines -= 1
 
@@ -59,7 +53,6 @@ class FractalPeer(val renderer: Renderer,
           }
         }
         case PixelResponse(x, y, r) => {
-//            print("-")
           renderer.set(x, y, r)
           pendingPixels -= 1
 

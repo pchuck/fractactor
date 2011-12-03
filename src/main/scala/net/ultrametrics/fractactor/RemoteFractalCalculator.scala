@@ -5,7 +5,6 @@ import scala.actors.Actor._
 import scala.actors.remote._
 import scala.actors.remote.RemoteActor._
 
-import net.ultrametrics.math.Complex
 import net.ultrametrics.fractactor.Settings._
 import net.ultrametrics.fractactor.Functions._
 

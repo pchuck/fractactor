@@ -1,10 +1,5 @@
 package net.ultrametrics.fractactor
 
-import scala.actors.Actor
-import scala.actors.Actor._
-import scala.actors.remote._
-import scala.actors.remote.RemoteActor._
-
 import net.ultrametrics.math.Complex
 import net.ultrametrics.fractactor.Functions._
 import net.ultrametrics.fractactor.Renderers._
